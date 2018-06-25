@@ -1,0 +1,74 @@
+#' WABP
+#'
+#' A port of Sun et al's ABP waveform onset detector.
+#' WABP(ABP) obtains the onset time (in samples) of each beat in the ABP waveform.
+#'
+#' Original code by James Sun on Nov 19, 2005.
+#' Ported to R by Ran Liu on June 24, 2018.
+#'
+#' @param abp 125 Hz arterial blood pressure waveform data in physiological units.
+#'
+#' @return Index of the onset of each heartbeat.
+#' @export
+wabp = function(abp) {
+
+    offset = 1600;
+    scale = 20;
+    Araw = abp*scale-offset;
+
+    # LPF
+    A = signal::filter(c(1, 0, 0, 0, 0, -2, 0, 0, 0, 0, 1), c(1, -2, 1), Araw)/24 + 30
+    A = (A[-(1:3)] + offset)/scale
+
+    # Slope-sum function
+    dypos = A[-1] - A[-length(A)]
+    dypos[dypos<0] = 0
+    ssf = c(0, 0, convolve(rep(1,16),rev(dypos),type='open'))
+
+    # Decision rule
+    avg0 = sum(ssf[1:1000])/1000
+    Threshold0 = 3*avg0
+
+    # Ignoring "learning period" for now
+    lockout = 0
+    timer = 0
+    z = rep(0,100000)
+    counter = 0
+
+    for (t in seq(from=50,to=length(ssf)-17,by=1)) {
+        lockout = lockout - 1
+        timer = timer + 1
+
+        if (lockout < 1 && ssf[t]>avg0+5) {
+            timer = 0
+            maxSSF = max(ssf[t:t+16])
+            minSSF = min(ssf[t-16:t])
+            if (maxSSF > minSSF + 10) {
+                onset = 0.01*maxSSF
+
+                tt = (t-16):t
+                dssf = ssf[tt] - ssf[tt-1]
+                BeatTime = max(which(dssf<onset)) + t - 17
+                counter = counter + 1
+
+                if (length(BeatTime) == 0) {
+                    counter = counter - 1
+                } else {
+                    z[counter] = BeatTime
+                }
+                Threshold0 = Threshold0 + 0.1*(maxSSF - Threshold0)
+                avg0 = Threshold0 / 3
+
+                lockout = 32
+            }
+        }
+
+        if (timer > 312) {
+            Threshold0 = Threshold0 - 1
+            avg0 = Threshold0 / 3
+        }
+    }
+
+    return (z[z!=0]-2)
+}
+
