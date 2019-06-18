@@ -52,11 +52,38 @@ abpfeature = function(abp, OnsetTimes) {
     dyneg[dyneg>0] = 0
 
     MAP = sapply(1:BeatQty, function(x) mean(abp[OnsetTimes[x]:OnsetTimes[x+1]]))
+    mean_dyneg = sapply(1:BeatQty, function(x) {
+        dyneg_interval = dyneg[OnsetTimes[x]:OnsetTimes[x+1]]
+        if (!any(dyneg_interval != 0)) {
+            return(0)
+        }
+        dyneg_interval = dyneg_interval[dyneg_interval!=0]
+        return(mean(dyneg_interval))
+    })
 
     RR = BeatPeriod/125
     sys_duration = 0.3*sqrt(RR)
     EndOfSys1 = round(OT + sys_duration*125)
+    SysArea1 = localfun.area(abp,OT,EndOfSys1,P_dias)
+
+    SlopeWindow = 35
+    ST = EndOfSys1
+
+    if (ST[length(ST)] > (length(abp)-35)) {
+        ST[length(ST)] = length(abp)-35
+    }
 
     return(list(time.systole=SysTime,systolic.bp=P_sys,time.diastole=DiasTime,diastolic.bp=P_dias,
-        pulse.pressure=PP, mean.bp=MAP, beat.period=BeatPeriod, end.of.systole.rr=EndOfSys1))
+        pulse.pressure=PP, mean.bp=MAP, beat.period=BeatPeriod, mean.dyneg=mean_dyneg, end.of.systole.rr=EndOfSys1,
+        systole.area.rr=SysArea1))
+}
+
+localfun.area = function(abp,onset,EndSys,P_dias) {
+    BeatQty = length(onset)
+    SysArea = rep(0,BeatQty)
+    for (i in 1:BeatQty) {
+        SysArea[i] = sum(abp[onset[i]:EndSys[i]]);
+    }
+    SysPeriod = EndSys - onset
+    SysArea = (SysArea - P_dias * SysPeriod)/125
 }
