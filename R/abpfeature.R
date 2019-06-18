@@ -73,9 +73,26 @@ abpfeature = function(abp, OnsetTimes) {
         ST[length(ST)] = length(abp)-35
     }
 
+    SlopeDomain = array(0,dim=c(BeatQty,SlopeWindow))
+    for (i in 1:SlopeWindow) {
+        SlopeDomain[,i] = ST+i-1
+    }
+
+    Slope = lapply(1:dim(SlopeDomain)[1], function(x) {
+        current.signal = abp[SlopeDomain[x,]]
+        return(current.signal[-1]-current.signal[-length(current.signal)])
+    })
+    Slope = do.call(rbind,Slope)
+    Slope[Slope>0] = 0
+
+    index = apply(abs(Slope), 1, function(x) which.min(x))
+
+    EndOfSys2 = mapply(function(a,b) SlopeDomain[a,b], 1:BeatQty, index)
+    SysArea2 = localfun.area(abp,OT,EndOfSys2,P_dias)
+
     return(list(time.systole=SysTime,systolic.bp=P_sys,time.diastole=DiasTime,diastolic.bp=P_dias,
         pulse.pressure=PP, mean.bp=MAP, beat.period=BeatPeriod, mean.dyneg=mean_dyneg, end.of.systole.rr=EndOfSys1,
-        systole.area.rr=SysArea1))
+        systole.area.rr=SysArea1, end.of.systole.minslope=EndOfSys2, systole.area.minslope=SysArea2))
 }
 
 localfun.area = function(abp,onset,EndSys,P_dias) {
