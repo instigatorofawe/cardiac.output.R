@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1532545762891.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CD303E33",
+    "lastKnownWriteTime" : 1532545766,
+    "last_content_update" : 1532545766640,
+    "path" : "~/cardiac.output.R/R/abpfeature.R",
+    "project_path" : "R/abpfeature.R",
+    "properties" : {
+        "cursorPosition" : "30,0",
+        "docOutlineVisible" : "0",
+        "scrollLine" : "0",
+        "source_window_id" : ""
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
