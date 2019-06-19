@@ -8,3 +8,4 @@ An adaptation of code from Sun et al. 2005.
 
 * `wabp` Beat onset detector for ABP waveforms
 * `abpfeature` Feature extractor for ABP waveforms
+* `jsqi` Signal quality index for ABP waveforms
