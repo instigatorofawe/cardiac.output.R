@@ -90,7 +90,7 @@ abpfeature = function(abp, OnsetTimes) {
     EndOfSys2 = mapply(function(a,b) SlopeDomain[a,b], 1:BeatQty, index)
     SysArea2 = localfun.area(abp,OT,EndOfSys2,P_dias)
 
-    return(list(time.systole=SysTime,systolic.bp=P_sys,time.diastole=DiasTime,diastolic.bp=P_dias,
+    return(data.frame(time.systole=SysTime,systolic.bp=P_sys,time.diastole=DiasTime,diastolic.bp=P_dias,
         pulse.pressure=PP, mean.bp=MAP, beat.period=BeatPeriod, mean.dyneg=mean_dyneg, end.of.systole.rr=EndOfSys1,
         systole.area.rr=SysArea1, end.of.systole.minslope=EndOfSys2, systole.area.minslope=SysArea2))
 }
