@@ -1,21 +1,21 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1560878209766.000,
+    "created" : 1560971340216.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1369052176",
-    "id" : "68E90A21",
-    "lastKnownWriteTime" : 1560956041,
-    "last_content_update" : 1560956041,
+    "hash" : "0",
+    "id" : "9C5778A2",
+    "lastKnownWriteTime" : 1560972325,
+    "last_content_update" : 1560972325374,
     "path" : "~/cardiac.output.R/DESCRIPTION",
     "project_path" : "DESCRIPTION",
     "properties" : {
         "cursorPosition" : "2,16",
         "scrollLine" : "0"
     },
-    "relative_order" : 3,
+    "relative_order" : 4,
     "source_on_save" : false,
     "source_window" : "",
     "type" : "dcf"

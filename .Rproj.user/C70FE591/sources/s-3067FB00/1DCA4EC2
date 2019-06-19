@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1560971040217.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1DCA4EC2",
+    "lastKnownWriteTime" : 1560972302,
+    "last_content_update" : 1560972302280,
+    "path" : "~/cardiac.output.R/R/estimate_co_parlikar.R",
+    "project_path" : "R/estimate_co_parlikar.R",
+    "properties" : {
+        "cursorPosition" : "14,40",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
