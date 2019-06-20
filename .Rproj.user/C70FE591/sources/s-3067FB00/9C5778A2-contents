@@ -1,6 +1,6 @@
 Package: cardiac.output
 Title: ABP Waveform Utilities and Cardiac Output Estimators
-Version: 0.0.2.1000
+Version: 0.0.2.4000
 Authors@R: person("Ran", "Liu", email = "rliu14@jhu.edu", role = c("aut", "cre"))
 Description: ABP waveform utilities adapted from code by Sun et al. 2005.
     Parlikar cardiac output estimator described in Parlikar et al. 2007.

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1561066227232.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B15DB79D",
+    "lastKnownWriteTime" : 1561071648,
+    "last_content_update" : 1561071648390,
+    "path" : "~/cardiac.output.R/R/wabp.R",
+    "project_path" : "R/wabp.R",
+    "properties" : {
+        "cursorPosition" : "7,127",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
